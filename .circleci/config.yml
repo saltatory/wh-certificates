@@ -19,7 +19,8 @@ jobs:
               -de "Dev AdHoc" \
               -ce certs/distribution/B2P79SVRQB.cer \
               -pk certs/distribution/B2P79SVRQB.p12 \
-              -pr profiles/adhoc/AdHoc_gg.wormhole.dev.ios.mobileprovision
+              -pr profiles/adhoc/AdHoc_gg.wormhole.dev.ios.mobileprovision \
+              -pp $TAPTHERE_PASSPHRASE
 
 workflows:
   version: 2
