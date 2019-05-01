@@ -150,7 +150,7 @@ trap 'rm -f "$t_cer_pem"; rm -f "$t_cer_der";rm -f "$t_key_pem";rm -f "$t_ouput_
 # See: https://docs.fastlane.tools/actions/match/
 # Decrypts both key and certificate to a temporary file.
 
-openssl aes-256-cbc -k "${passphrase}" -in "${certificate}" -out "${t_cer_der}" -a -d -md sha256
+openssl aes-256-cbc -k "${passphrase}" -in "${certificate}" -out "${t_cer_der}" -a -d -md md5
 status=$?
 
 if [ ${status} -ne 0 ]
@@ -159,7 +159,7 @@ then
   exit $status
 fi
 
-openssl aes-256-cbc -k "${passphrase}" -in "${private_key}" -out "${t_key_pem}" -a -d -md sha256
+openssl aes-256-cbc -k "${passphrase}" -in "${private_key}" -out "${t_key_pem}" -a -d -md md5
 status=$?
 
 if [ ${status} -ne 0 ]
@@ -168,7 +168,7 @@ then
   exit $status
 fi
 
-openssl aes-256-cbc -k "${passphrase}" -in "${provisioning_profile}" -out "${t_provisioning_profile}" -a -d -md sha256
+openssl aes-256-cbc -k "${passphrase}" -in "${provisioning_profile}" -out "${t_provisioning_profile}" -a -d -md md5
 status=$?
 
 if [ ${status} -ne 0 ]
