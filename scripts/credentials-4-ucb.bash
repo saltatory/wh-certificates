@@ -150,7 +150,7 @@ trap 'rm -f "$t_cer_pem"; rm -f "$t_cer_der";rm -f "$t_key_pem";rm -f "$t_ouput_
 # See: https://docs.fastlane.tools/actions/match/
 # Decrypts both key and certificate to a temporary file.
 
-openssl aes-256-cbc -k ${passphrase} -in ${certificate} -out ${t_cer_der} -a -d
+openssl aes-256-cbc -k "${passphrase}" -in "${certificate}" -out "${t_cer_der}" -a -d -md sha256
 status=$?
 
 if [ ${status} -ne 0 ]
@@ -159,7 +159,7 @@ then
   exit $status
 fi
 
-openssl aes-256-cbc -k ${passphrase} -in ${private_key} -out ${t_key_pem} -a -d
+openssl aes-256-cbc -k "${passphrase}" -in "${private_key}" -out "${t_key_pem}" -a -d -md sha256
 status=$?
 
 if [ ${status} -ne 0 ]
@@ -168,7 +168,7 @@ then
   exit $status
 fi
 
-openssl aes-256-cbc -k ${passphrase} -in ${provisioning_profile} -out ${t_provisioning_profile} -a -d
+openssl aes-256-cbc -k "${passphrase}" -in "${provisioning_profile}" -out "${t_provisioning_profile}" -a -d -md sha256
 status=$?
 
 if [ ${status} -ne 0 ]
@@ -179,7 +179,7 @@ fi
 
 # Converts the certificate to a PRM from a DER file
 
-openssl x509 -inform der -in ${t_cer_der} -outform pem -out ${t_cer_pem}
+openssl x509 -inform der -in "${t_cer_der}" -outform pem -out "${t_cer_pem}"
 status=$?
 
 if [ ${status} -ne 0 ]
@@ -190,7 +190,7 @@ fi
 
 # Finally, generates the output .p12 file to be pushed to UCB.
 
-openssl pkcs12 -export -out $t_ouput_p12 -inkey $t_key_pem -in $t_cer_pem -password pass:$passphrase
+openssl pkcs12 -export -out "${t_ouput_p12}" -inkey "${t_key_pem}" -in "${t_cer_pem}" -password "pass:${passphrase}"
 status=$?
 
 if [ ${status} -ne 0 ]
