@@ -1,0 +1,35 @@
+version: 2
+jobs:
+
+  # Branch/Merge Targets Configuration
+
+  update_ucb_credentials:
+    docker:
+      - image: wormholegg/circleci-fastlane-android:latest
+    steps:
+      - checkout
+      - run:
+          name: Skip LFS Checkout
+          command: export GIT_LFS_SKIP_SMUDGE=1
+      - run:
+          name: Update Unity Cloud Build Credentials - Dev AdHoc
+          no_output_timeout: 60m
+          command: |
+            scripts/credentials-4-ucb.bash \
+              -a $UNITY_CLOUD_BUILD_API_KEY \
+              -o tapthereinc \
+              -cr f82d9014-0cae-4d15-a06a-1940f5c120ae \
+              -de "Dev AdHoc" \
+              -ce certs/distribution/B2P79SVRQB.cer \
+              -pk certs/distribution/B2P79SVRQB.p12 \
+              -pr profiles/adhoc/AdHoc_gg.wormhole.dev.ios.mobileprovision
+
+workflows:
+  version: 2
+  "Update Unity Cloud Build Credentials":
+    jobs:
+      - update_ucb_credentials:
+          filters:
+            branches:
+              only:
+                - master
