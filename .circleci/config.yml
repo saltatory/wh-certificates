@@ -9,9 +9,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Skip LFS Checkout
-          command: export GIT_LFS_SKIP_SMUDGE=1
-      - run:
           name: Update Unity Cloud Build Credentials - Dev AdHoc
           no_output_timeout: 60m
           command: |
