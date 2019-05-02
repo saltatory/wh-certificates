@@ -205,8 +205,8 @@ curl \
   --fail \
   -X PUT \
   -F label="${credentials_description} - $(date)" \
-  -F fileCertificate=ucb.p12 \
-  -F fileProvisioningProfile="${t_provisioning_profile}" \
+  -F fileCertificate="@${t_ouput_p12}" \
+  -F fileProvisioningProfile="@${t_provisioning_profile}" \
   -F certificatePass="${passphrase}" \
   -H "Content-Type: multipart/form-data" \
   -H "Authorization: Basic ${apikey}" \
