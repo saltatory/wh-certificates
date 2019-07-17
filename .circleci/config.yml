@@ -15,10 +15,23 @@ jobs:
             scripts/credentials-4-ucb.bash \
               -a $UNITY_CLOUD_BUILD_API_KEY \
               -o tapthereinc \
+              -cr 143487b3-d05e-4547-886e-bbfc1f35e071 \
+              -de "Dev TestFlight" \
+              -ce certs/distribution/TPF4K8R4MK.cer \
+              -pk certs/distribution/TPF4K8R4MK.p12 \
+              -pr profiles/appstore/AppStore_gg.wormhole.dev.ios.mobileprovision \
+              -pp $TAPTHERE_PASSPHRASE
+      - run:
+          name: Update Unity Cloud Build Credentials - Dev AdHoc
+          no_output_timeout: 60m
+          command: |
+            scripts/credentials-4-ucb.bash \
+              -a $UNITY_CLOUD_BUILD_API_KEY \
+              -o tapthereinc \
               -cr f82d9014-0cae-4d15-a06a-1940f5c120ae \
               -de "Dev AdHoc" \
-              -ce certs/distribution/B2P79SVRQB.cer \
-              -pk certs/distribution/B2P79SVRQB.p12 \
+              -ce certs/distribution/TPF4K8R4MK.cer \
+              -pk certs/distribution/TPF4K8R4MK.p12 \
               -pr profiles/adhoc/AdHoc_gg.wormhole.dev.ios.mobileprovision \
               -pp $TAPTHERE_PASSPHRASE
 
