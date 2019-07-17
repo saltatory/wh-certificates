@@ -134,7 +134,7 @@ then
   usage_exit
 elif [ ! -f "${provisioning_profile}" ]
 then
-  echo "Provisioning profile file not found: ${private_key}"
+  echo "Provisioning profile file not found: ${provisioning_profile}"
   usage_exit
 fi
 
